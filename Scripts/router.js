@@ -1,21 +1,18 @@
 "use strict";
 
-(function (core) {
+(function(core) {
     class Router {
         // constructors
-        constructor() 
-        {
+        constructor() {
             this.ActiveLink = "";
         }
 
         // Public Properties (getters and setters)
-        get ActiveLink() 
-        {
+        get ActiveLink() {
             return this.m_activeLink;
         }
 
-        set ActiveLink(link) 
-        {
+        set ActiveLink(link) {
             this.m_activeLink = link;
         }
 
@@ -27,8 +24,7 @@
          * @param {string} route
          * @returns {void}
          */
-        Add(route) 
-        {
+        Add(route) {
             this.m_routingTable.push(route);
         }
 
@@ -39,8 +35,7 @@
          * @param {string} routingTable
          * @returns {void}
          */
-        AddTable(routingTable) 
-        {
+        AddTable(routingTable) {
             this.m_routingTable = routingTable;
         }
 
@@ -51,8 +46,7 @@
          * @param {string} route
          * @returns {number}
          */
-        Find(route) 
-        {
+        Find(route) {
             return this.m_routingTable.indexOf(route);
         }
 
@@ -64,8 +58,7 @@
          * @param {string} route
          * @returns {boolean}
          */
-        Remove(route) 
-        {
+        Remove(route) {
             if (this.Find(route) > -1) {
                 this.m_routingTable.splice(this.Find(route), 1);
                 return true;
@@ -78,8 +71,7 @@
          *
          * @returns {string}
          */
-        ToString() 
-        {
+        ToString() {
             return this.m_routingTable.toString();
         }
     }
@@ -87,26 +79,24 @@
 })(core || (core = {}));
 
 let router = new core.Router();
-router.AddTable(["/", 
-                 "/home", 
-                 "/about", 
-                 "/services", 
-                 "/contact", 
-                 "/contact-list", 
-                 "/projects", 
-                 "/register", 
-                 "/login", 
-                 "/edit"]);
-                
+router.AddTable(["/",
+    "/home",
+    "/about",
+    "/services",
+    "/contact",
+    "/contact-list",
+    "/projects",
+    "/register",
+    "/login",
+    "/edit",
+    "/task-list"
+
+]);
+
 let route = location.pathname; // alias for location.pathname
 
-if(router.Find(route) > -1)
-{
+if (router.Find(route) > -1) {
     router.ActiveLink = (route == "/") ? "home" : route.substring(1)
-}
-else
-{
+} else {
     router.ActiveLink = "404";
 }
-
-
